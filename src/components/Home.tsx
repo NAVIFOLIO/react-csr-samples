@@ -6,6 +6,7 @@ export type LinkCardProps = {
     link: string;
     title: string;
     description: string;
+    gitlink: string;
 };
 
 const d: Array<LinkCardProps> = [
@@ -14,6 +15,7 @@ const d: Array<LinkCardProps> = [
         link: '/microTodo',
         title: 'Micro Todo',
         description: 'This is micro todo app',
+        gitlink: 'https://github.com/NAVIFOLIO/react-csr-samples/tree/main/src/micro-todo-app'
     },
 ];
 

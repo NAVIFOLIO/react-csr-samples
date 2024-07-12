@@ -17,6 +17,7 @@ const LinkCards: FC<LinkCardListProps> = ({ texts }) => {
                     link={text.link}
                     title={text.title}
                     description={text.description}
+                    gitlink={text.gitlink}
                 />
             ))}
         </div>
