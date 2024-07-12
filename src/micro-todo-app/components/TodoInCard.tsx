@@ -26,7 +26,6 @@ interface TodoInCardProps {
 const TodoInCard: FC<TodoInCardProps> = ({ todoData }) => {
     const todosCtx = useTodosContext();
     const { id, title, description, date, progress } = todoData;
-    const { from, to } = date;
 
     return (
         <Card>
@@ -54,9 +53,9 @@ const TodoInCard: FC<TodoInCardProps> = ({ todoData }) => {
                     </div>
                     <div className="mr-6">
                         <p>
-                            {from.getMonth()}/{from.getDate()}/
-                            {from.getFullYear()} - {to.getMonth()}/
-                            {to.getDate()}
+                            {date!.from!.getMonth()}/{date!.from!.getDate()}/
+                            {date!.from!.getFullYear()} - {date!.to!.getMonth()}/
+                            {date!.to!.getDate()}
                         </p>
                     </div>
                     <div className="ml-auto">

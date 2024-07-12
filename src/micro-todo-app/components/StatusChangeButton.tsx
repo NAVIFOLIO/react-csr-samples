@@ -15,12 +15,14 @@ interface StatusButtonProps {
     todoNow: Todo;
 }
 
+type SelectEventObject = 'New' | 'Working' | 'Pending' | 'Done';
+
 const StatusChangeButton: FC<StatusButtonProps> = ({ todoNow }) => {
     const todosCtx = useTodosContext();
 
     return (
         <Select
-            onValueChange={(value) => {
+            onValueChange={(value: SelectEventObject) => {
                 todosCtx.editTodo({
                     ...todoNow,
                     progress: value,

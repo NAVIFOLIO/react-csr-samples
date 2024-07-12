@@ -18,7 +18,6 @@ interface TodoInTableProps {
 const TodoInTable: FC<TodoInTableProps> = ({ todoData }) => {
     const todosCtx = useTodosContext();
     const { id, title, description, date } = todoData;
-    const { from, to } = date;
 
     return (
         <>
@@ -37,8 +36,8 @@ const TodoInTable: FC<TodoInTableProps> = ({ todoData }) => {
                         <PopoverContent>{description}</PopoverContent>
                     </Popover>
                 </TableCell>
-                <TableCell>{from.toDateString()}</TableCell>
-                <TableCell>{to.toDateString()}</TableCell>
+                <TableCell>{date!.from!.toDateString()}</TableCell>
+                <TableCell>{date!.to!.toDateString()}</TableCell>
                 <TableCell className="text-right">
                     <Button
                         onClick={() => {
