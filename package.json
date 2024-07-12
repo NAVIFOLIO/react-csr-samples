@@ -11,6 +11,7 @@
     "rebuild": "vite build && rm -R docs && cp -r dist docs",
     "git": "git add . && git commit && git push origin main"
   },
+  "homepage": "https://navifolio.github.io/react-csr-samples/",
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.1",
