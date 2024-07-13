@@ -90,13 +90,16 @@ const TodoForm: FC = () => {
                         <SheetClose asChild>
                             <Button
                                 onClick={() => {
-                                    if (inputTitle !== '' && inputDescription !== ''){
-                                    todosCtx.addTodo({
-                                        title: inputTitle,
-                                        description: inputDescription,
-                                        date: inputDate,
-                                    });
-                                }
+                                    if (
+                                        inputTitle !== '' &&
+                                        inputDescription !== ''
+                                    ) {
+                                        todosCtx.addTodo({
+                                            title: inputTitle,
+                                            description: inputDescription,
+                                            date: inputDate,
+                                        });
+                                    }
                                 }}
                             >
                                 <CalendarPlus2 className="mr-2 h-4 w-4" />

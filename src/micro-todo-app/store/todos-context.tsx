@@ -1,7 +1,8 @@
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
 import { DateRange } from 'react-day-picker';
 import { v4 as uuidv4 } from 'uuid';
-import { initialState } from './demoData';
+import initializer from './initializer';
+import syncWithClientDB from './syncData';
 
 export type Todo = {
     id: string;
@@ -11,11 +12,16 @@ export type Todo = {
     progress: 'New' | 'Working' | 'Done' | 'Pending';
 };
 
-export type NewTodo = {
+export interface NewTodo {
     title: string;
     description: string;
     date: DateRange | undefined;
-};
+}
+
+export interface NewTodoExtendToSync extends NewTodo {
+    // add id property to sync with indexedDB
+    id: string;
+}
 
 export type TodosState = {
     Todos: Todo[];
@@ -48,6 +54,11 @@ type AddTodoAction = {
     payload: NewTodo;
 };
 
+type AddTodoActionToSync = {
+    type: 'ADD_TODO';
+    payload: NewTodoExtendToSync;
+};
+
 type RemoveTodoAction = {
     type: 'REMOVE_TODO';
     id: string;
@@ -58,7 +69,8 @@ type EditTodoAction = {
     updates: Todo;
 };
 
-type Action = AddTodoAction | RemoveTodoAction | EditTodoAction;
+// export type Action = AddTodoAction | RemoveTodoAction | EditTodoAction;
+export type Action = AddTodoActionToSync | RemoveTodoAction | EditTodoAction;
 
 function todosReducer(state: TodosState, action: Action): TodosState {
     switch (action.type) {
@@ -67,7 +79,8 @@ function todosReducer(state: TodosState, action: Action): TodosState {
                 Todos: [
                     ...state.Todos,
                     {
-                        id: uuidv4(),
+                        // id: uuidv4();
+                        id: action.payload.id,
                         title: action.payload.title,
                         description: action.payload.description,
                         date: action.payload.date,
@@ -99,6 +112,11 @@ function todosReducer(state: TodosState, action: Action): TodosState {
     }
 }
 
+let initialState: TodosState;
+(async () => {
+    initialState = await initializer();
+})();
+
 export default function TodosContextProvider({
     children,
 }: TodosContextProviderProps) {
@@ -107,13 +125,30 @@ export default function TodosContextProvider({
     const ctx: TodosContextValue = {
         Todos: todosState.Todos,
         addTodo(newTodoData) {
-            dispatch({ type: 'ADD_TODO', payload: newTodoData });
+            const newId = uuidv4();
+            const newTodoDataToSync = {
+                ...newTodoData,
+                id: newId,
+            };
+            dispatch({
+                type: 'ADD_TODO',
+                // payload: newTodoData
+                payload: newTodoDataToSync,
+            });
+            syncWithClientDB(todosState, {
+                type: 'ADD_TODO',
+                payload: newTodoDataToSync,
+            });
         },
         removeTodo(todoId) {
             dispatch({ type: 'REMOVE_TODO', id: todoId });
+            console.log('remove is called');
+            syncWithClientDB(todosState, { type: 'REMOVE_TODO', id: todoId });
         },
         editTodo(updates) {
             dispatch({ type: 'EDIT_TODO', updates });
+            console.log('edit is called');
+            syncWithClientDB(todosState, { type: 'EDIT_TODO', updates });
         },
     };
 

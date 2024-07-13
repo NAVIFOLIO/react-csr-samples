@@ -47,27 +47,27 @@ const TodoInCard: FC<TodoInCardProps> = ({ todoData }) => {
                     </AccordionItem>
                 </Accordion>
             </CardHeader>
-            <CardFooter className='flex justify-between'>
-                    <div className="w-18 mr-4">
-                        <StatusChangeButton todoNow={todoData} />
-                    </div>
-                    <div className="mr-6">
-                        <p>
-                            {date!.from!.getMonth()}/{date!.from!.getDate()}/
-                            {date!.from!.getFullYear()} - {date!.to!.getMonth()}/
-                            {date!.to!.getDate()}
-                        </p>
-                    </div>
-                    <div className="ml-auto">
-                        <Button
-                            onClick={() => {
-                                todosCtx.removeTodo(id);
-                            }}
-                            className="h-8 bg-gray-900"
-                        >
-                            <Trash2 size={18} />
-                        </Button>
-                    </div>
+            <CardFooter className="flex justify-between">
+                <div className="w-18 mr-4">
+                    <StatusChangeButton todoNow={todoData} />
+                </div>
+                <div className="mr-6">
+                    <p>
+                        {date!.from!.getMonth()}/{date!.from!.getDate()}/
+                        {date!.from!.getFullYear()} - {date!.to!.getMonth()}/
+                        {date!.to!.getDate()}
+                    </p>
+                </div>
+                <div className="ml-auto">
+                    <Button
+                        onClick={() => {
+                            todosCtx.removeTodo(id);
+                        }}
+                        className="h-8 bg-gray-900"
+                    >
+                        <Trash2 size={18} />
+                    </Button>
+                </div>
             </CardFooter>
         </Card>
     );
