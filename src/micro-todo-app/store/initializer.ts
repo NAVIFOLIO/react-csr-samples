@@ -22,15 +22,10 @@ export default async function initializer(): Promise<TodosState> {
         // Add dummy data to clientDB to demonstrate.
         // This is only nessesary for demo.
         const tx = await db.transaction('todos', 'readwrite');
+        
         await Promise.all([
-            tx.store.add(demoData.Todos[0]),
-            tx.store.add(demoData.Todos[1]),
-            tx.store.add(demoData.Todos[2]),
-            tx.store.add(demoData.Todos[3]),
-            tx.store.add(demoData.Todos[4]),
-            tx.store.add(demoData.Todos[5]),
-            tx.store.add(demoData.Todos[6]),
-            tx.done,
+            demoData.Todos.map((todo) => tx.store.add(todo)),
+            tx.done
         ]);
 
         initialState = demoData;
