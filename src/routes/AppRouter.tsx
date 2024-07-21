@@ -1,15 +1,15 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import Header from '@/components/Header';
 import { type FC } from 'react';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 
+import Header from '@/components/Header';
 import Home from '@/components/Home';
 import microTodoApp from '../micro-todo-app/App';
 
-const links: Array<string> = ['/', '/microTodo'];
+import { InternalLinkContainer } from '@/components/LinkContainer';
 
 const AppRouter: FC = () => (
     <HashRouter>
-        <Header />
+        <InternalLinkContainer as={Header} internalLink="/" />
         <Routes>
             <Route path="/" Component={Home} />
             <Route path="/microTodo" Component={microTodoApp} />
