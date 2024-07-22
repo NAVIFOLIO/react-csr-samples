@@ -1,10 +1,9 @@
-import React from 'react';
 import { type FC } from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import TodosContextProvider from './store/todos-context';
 
-const App: FC = () => {
+const MicroTodoApp: FC = () => {
     return (
         <TodosContextProvider>
             <TodoForm />
@@ -13,4 +12,4 @@ const App: FC = () => {
     );
 };
 
-export default App;
+export default MicroTodoApp;

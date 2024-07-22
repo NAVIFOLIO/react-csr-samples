@@ -20,5 +20,13 @@ export const apps_info: AppsInfoType = {
             gitlink:
                 'https://github.com/NAVIFOLIO/react-csr-samples/tree/main/src/micro-todo-app',
         },
+        {
+            id: 2,
+            title: 'Tourism Sample Site',
+            description: 'REST API data fetch sample',
+            internalLink: '/tourism',
+            gitlink:
+                'https://github.com/NAVIFOLIO/react-csr-samples/tree/main/src/TourismSite',
+        },
     ],
 };

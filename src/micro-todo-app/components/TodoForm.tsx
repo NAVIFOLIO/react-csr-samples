@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
 import { type FC } from 'react';
-
 import {
     Sheet,
     SheetClose,
@@ -47,7 +45,7 @@ const TodoForm: FC = () => {
                         Add Todo
                     </Button>
                 </SheetTrigger>
-                <SheetContent className="w-[400px] sm:w-[540px]">
+                <SheetContent className="w-[400px] sm:w-[540px] max-w-full">
                     <SheetHeader>
                         <SheetTitle>Add Your New Todo</SheetTitle>
                         <SheetDescription>
