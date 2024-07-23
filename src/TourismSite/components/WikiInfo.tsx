@@ -40,11 +40,9 @@ export function WikiInfo({ title }: WikiInfoComponentProps) {
                         width="100%"
                     />
                     <div className="p-5">
-                        <a href="#">
-                            <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
-                                {wikiInfo.title}
-                            </h5>
-                        </a>
+                        <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
+                            {wikiInfo.title}
+                        </h5>
                         <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
                             {parse(wikiInfo.summary)}
                         </p>
